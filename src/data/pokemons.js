@@ -1,8 +1,35 @@
-import { useState } from 'react';
-import PokemonCard from './PokemonCard';
-import {POKEMONS} from '../data/pokemons';
-/*
-const POKEMONS = [
+export const POKEMONS = [
+
+  /*
+  {
+    id: 25,
+    name: 'Pikachu',
+    type: 'Elétrico',
+    imageUrl:
+      'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png',
+    description:
+      'Quando vários destes Pokémon se juntam, sua eletricidade pode causar tempestades de raios.',
+  },
+  {
+    id: 1,
+    name: 'Bulbasaur',
+    type: 'Grama / Veneno',
+    imageUrl:
+      'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png',
+    description:
+      'Um Pokémon amigável que carrega uma semente nas costas desde o nascimento.',
+  },
+  {
+    id: 4,
+    name: 'Charmander',
+    type: 'Fogo',
+    imageUrl:
+      'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png',
+    description:
+      'A chama na ponta da cauda indica sua saúde e emoções.',
+  },
+  */
+
   { id: 1, name: 'Bulbasaur', type: 'Grama / Veneno', imageUrl: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png' },
   { id: 2, name: 'Ivysaur', type: 'Grama / Veneno', imageUrl: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png' },
   { id: 3, name: 'Venusaur', type: 'Grama / Veneno', imageUrl: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png' },
@@ -1033,45 +1060,9 @@ const POKEMONS = [
   { id: 1026, name: 'Pending', type: 'Desconhecido', imageUrl: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1026.png' },
   { id: 1027, name: 'Pending', type: 'Desconhecido', imageUrl: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1027.png' },
   { id: 1028, name: 'Pending', type: 'Desconhecido', imageUrl: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1028.png' }
-];
-*/
+]
 
-function PokemonList() {
-  const [pokemons] = useState(POKEMONS);
-  const [filtro, setFiltro] = useState('');
-
-  const listaFiltrada = pokemons.filter((p) =>
-    p.name.toLowerCase().includes(filtro.toLowerCase())
-  );
-
-  return (
-    <section>
-      <label htmlFor="busca">Buscar por nome: </label>
-      <input
-        id="busca"
-        type="search"
-        value={filtro}
-        onChange={(e) => setFiltro(e.target.value)}
-        placeholder="Ex.: char"
-      />
-
-      <p>Mostrando {listaFiltrada.length} Pokémon(s)</p>
-
-      {listaFiltrada.length === 0 ? (
-        <p>Nenhum Pokémon encontrado para esta busca.</p>
-      ) : (
-        listaFiltrada.map((pokemon) => (
-          <PokemonCard
-            key={pokemon.id}
-            id={pokemon.id}
-            name={pokemon.name}
-            type={pokemon.type}
-            imageUrl={pokemon.imageUrl}
-          />
-        ))
-      )}
-    </section>
-  );
+export function getPokemonById(id) {
+  const numericId = Number(id)
+  return POKEMONS.find((p) => p.id === numericId) ?? null
 }
-
-export default PokemonList;
